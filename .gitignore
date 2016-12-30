@@ -2,8 +2,10 @@
 Thumbs.db
 ehthumbs.db
 
-# saved models
+# saved files
 *.chk*
+*.pyc
+
 # Folder config file
 Desktop.ini
 
