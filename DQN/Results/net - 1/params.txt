@@ -1,0 +1,7 @@
+Learning rate = 0.001000
+lr decay = 0.980000
+Epsilon = 0.800000
+eps decay = 0.900000
+Buffer size = 10000
+Batch size = 64
+hidden layers: 16
