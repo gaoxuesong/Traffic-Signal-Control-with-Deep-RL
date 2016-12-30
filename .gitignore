@@ -5,6 +5,10 @@ ehthumbs.db
 # saved files
 *.chk*
 *.pyc
+saved_net*
+
+# Udacity
+Udacity/
 
 # Folder config file
 Desktop.ini
