@@ -7,7 +7,7 @@ ehthumbs.db
 *.pyc
 saved_net*
 *checkpoint*
-*Chart Maker.xlsm
+*\Chart Maker.xlsm
 !Chart Maker.xlsm
 
 # Udacity
