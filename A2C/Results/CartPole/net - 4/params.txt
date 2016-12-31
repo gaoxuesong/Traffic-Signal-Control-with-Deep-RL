@@ -1,0 +1,4 @@
+Learning rate = 0.000100
+lr decay = 1.000000
+hidden layers: 32
+update cycle: 8
