@@ -7,8 +7,8 @@ ehthumbs.db
 *.pyc
 saved_net*
 *checkpoint*
-*\Chart Maker.xlsm
-!Chart Maker.xlsm
+*Chart Maker.xlsm
+!A2C\Results\LunarLander\Chart Maker.xlsm
 
 # Udacity
 Udacity/
