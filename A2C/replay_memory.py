@@ -28,7 +28,7 @@ class ReplayMemory(object):
     def size(self):
         return self.count
     
-    def sample_batch(self, batch_size):
+    def sample_batch(self):
         
         s_batch = np.array(self.buf)[:,0].tolist()
         a_batch = np.array(self.buf)[:,1].tolist()
