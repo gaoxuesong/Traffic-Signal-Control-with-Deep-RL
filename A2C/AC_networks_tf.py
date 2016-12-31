@@ -42,27 +42,27 @@ class ActorNet(object):
         # Combine the gradients here 
         self.responsible_outputs = tf.reduce_sum(self.policy * self.one_hot_action, [1])
         self.log_pi = tf.log(self.responsible_outputs)
-        
-        self.actor_loss = - tf.reduce_sum(self.log_pi * self.td)
+        self.loss_vector = self.log_pi * tf.reduce_sum(self.td,[1])
+        self.actor_loss = - tf.reduce_sum(self.loss_vector)
         self.network_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, "actor")
         self.actor_gradients = tf.gradients(self.actor_loss, self.network_vars)
         
         self.optimize = tf.train.AdamOptimizer(self.learning_rate).apply_gradients(zip(self.actor_gradients, self.network_vars))
         
     def create_net(self):
-        
-        w_1 = tf.Variable(tf.truncated_normal([self.dim_s, self.hid_layers[0]]))
+        scale = 0.01
+        w_1 = tf.Variable(tf.truncated_normal([self.dim_s, self.hid_layers[0]])) * scale
         b_1 = tf.Variable(tf.zeros([self.hid_layers[0]]))
         inputs_1 = tf.matmul(self.inputs, w_1) + b_1
         net = tf.nn.tanh(inputs_1)
         
         if(len(self.hid_layers) > 1):
-            w_2 = tf.Variable(tf.truncated_normal([self.hid_layers[0], self.hid_layers[1]]))
+            w_2 = tf.Variable(tf.truncated_normal([self.hid_layers[0], self.hid_layers[1]])) * scale
             b_2 = tf.Variable(tf.zeros([self.hid_layers[1]]))
             inputs_2 = tf.matmul(self.out_1, w_2) + b_2
             net = tf.nn.tanh(inputs_2)
         
-        w_3 = tf.Variable(tf.truncated_normal([self.hid_layers[-1], self.dim_a]))
+        w_3 = tf.Variable(tf.truncated_normal([self.hid_layers[-1], self.dim_a])) * scale
         b_3 = tf.Variable(tf.zeros([self.dim_a]))
         logits = tf.matmul(net, w_3) + b_3
         policy = tf.nn.softmax(logits)
@@ -152,7 +152,7 @@ class CriticNet(object):
         
     def train(self, inputs, R, lr_rate):
         #pdb.set_trace()
-        return self.sess.run([self.value, self.loss, self.optimize], feed_dict={
+        return self.sess.run([self.value, self.critic_loss, self.optimize], feed_dict={
                 self.inputs: inputs,
                 self.R: R,
                 self.learning_rate: lr_rate
