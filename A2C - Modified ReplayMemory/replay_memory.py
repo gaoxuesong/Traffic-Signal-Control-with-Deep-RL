@@ -12,9 +12,9 @@ import pdb
 
 class ReplayMemory(object):
     
-    def __init__(self, buffer_size, random_seed=123):
+    def __init__(self, random_seed=123):
         
-        self.buffer_size = buffer_size
+        #self.buffer_size = buffer_size
         self.count = 0
         self.buf = deque()
         random_seed = random_seed
@@ -22,16 +22,13 @@ class ReplayMemory(object):
     def add(self, s, a, r, s2, t):
         
         # Current state, Action, Reward, Next State, terminal?
-        exp = (s, a, r, s2, t)
-        if self.count >= self.buffer_size:
-            self.buf.popleft()
-        
+        exp = (s, a, r, s2, t)        
         self.buf.append(exp)
         self.count += 1
     def size(self):
         return self.count
     
-    def sample_batch(self, batch_size):
+    def sample_batch(self):
         
         s_batch = np.array(self.buf)[:,0].tolist()
         a_batch = np.array(self.buf)[:,1].tolist()

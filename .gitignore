@@ -8,10 +8,13 @@ ehthumbs.db
 saved_net*
 *checkpoint*
 *Chart Maker.xlsm
+*Chart Maker - old.xlsm
 !A2C\Results\LunarLander\Chart Maker.xlsm
+*reward
 
-# Udacity
+# Udacity and Archive
 Udacity/
+Archive/
 
 # Folder config file
 Desktop.ini

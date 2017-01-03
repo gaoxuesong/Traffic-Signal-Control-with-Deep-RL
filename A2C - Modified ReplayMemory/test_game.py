@@ -15,7 +15,7 @@ class test_env(object):
     def step(self, A):
         #pdb.set_trace()
         t = 0
-        a = np.argmax(A)
+        a = A
         if a == 1:
             self.s = self.s + 1
         else:
@@ -24,9 +24,11 @@ class test_env(object):
         if self.s < 0:
             r = -20
             self.s = 0
+            t = 1
         elif self.s > 10:   # 3
             r = -20        # -20
             self.s = 10     # 3
+            t = 1
         elif self.s == 5:
             r = 100
             t = 1
