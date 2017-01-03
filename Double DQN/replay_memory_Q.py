@@ -7,6 +7,10 @@ from collections import deque
 import random
 import numpy as np
 import pdb
+try:
+    import cPickle
+except:
+    import _pickle as cPickle
 
 # In[ ]:
 
@@ -25,6 +29,7 @@ class ReplayMemory(object):
         exp = (s, a, r, s2, t)
         if self.count >= self.buffer_size:
             self.buf.popleft()
+            self.count -= 1
         
         self.buf.append(exp)
         self.count += 1
@@ -50,4 +55,14 @@ class ReplayMemory(object):
         
         self.buf.clear()
         self.count = 0
+        
+    def save_buf(self, filename):
+        with open(filename+'RM_buffer', 'wb') as f:  # Python 3: open(..., 'wb')
+            cPickle.dump([self.count, self.buf], f)
+    
+    def load_buf(self, filename):
+        with open(filename+'RM_buffer', 'rb') as f:  # Python 3: open(..., 'wb')
+            [self.count, self.buf] = cPickle.load(f)
+        
+        
 

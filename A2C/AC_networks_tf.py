@@ -59,7 +59,7 @@ class ActorNet(object):
         if(len(self.hid_layers) > 1):
             w_2 = tf.Variable(tf.truncated_normal([self.hid_layers[0], self.hid_layers[1]])) * scale
             b_2 = tf.Variable(tf.zeros([self.hid_layers[1]]))
-            inputs_2 = tf.matmul(self.out_1, w_2) + b_2
+            inputs_2 = tf.matmul(net, w_2) + b_2
             net = tf.nn.tanh(inputs_2)
         
         w_3 = tf.Variable(tf.truncated_normal([self.hid_layers[-1], self.dim_a])) * scale
@@ -138,7 +138,7 @@ class CriticNet(object):
         if(len(self.hid_layers) > 1):
             w_2 = tf.Variable(tf.truncated_normal([self.hid_layers[0], self.hid_layers[1]]))
             b_2 = tf.Variable(tf.zeros([self.hid_layers[1]]))
-            inputs_2 = tf.matmul(self.out_1, w_2) + b_2
+            inputs_2 = tf.matmul(net, w_2) + b_2
             net = tf.nn.tanh(inputs_2)
         
         w_3 = tf.Variable(tf.truncated_normal([self.hid_layers[-1], 1]))

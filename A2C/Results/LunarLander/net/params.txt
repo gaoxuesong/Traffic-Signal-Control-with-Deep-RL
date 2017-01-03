@@ -1,4 +1,5 @@
-Learning rate = 0.010000
-lr decay = 1.000000
-hidden layers: 32
-update cycle: 1
+Learning rate = 0.100000
+lr decay = 0.955000
+actor hidden layers: 32 32
+critic hidden layers: 16 16
+update cycle: 64
